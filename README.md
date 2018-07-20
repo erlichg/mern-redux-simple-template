@@ -4,18 +4,27 @@
 - React
 - NodeJS
 - Redux
-- Basic authentication
+- Basic authentication (working in production mode only as it is done via expressJS)
 
 
 # Installation
 - npm install
 - cd client & npm install
 
-# Start server
+# DEVELOPMENT
+## Start server
 node bin/www
 
-# Start client
+## Start client
 cd client & npm start
+
+
+## PRODUCTION
+## Compile client
+cd client & npm run build
+
+## Run Server
+env=PRODUCTION node bin/www
 
 # Connection
 browse to http://localhost:3000
@@ -23,5 +32,5 @@ browse to http://localhost:3000
 # Details
 Server runs node.js on port 3001
 Client runs on port 3000
-All requests not to a static asset are forwarded to server
-e.g. http://localhost:3000/api/users is forwarded to express server /api/users
+In production, express serves the entire application (client + server) so auth is through exress
+In Development, express serves the server while react dev server runs the client - easier to code (quick compile).
