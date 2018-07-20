@@ -1,9 +1,31 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const router = express.Router();
 
-module.exports = router;
+function users(db) {
+    /* GET users listing. */
+    router.get("/", (req, res, next) => {
+        db.collection("users")
+            .find()
+            .toArray((err, result) => {
+                if (err) {
+                    console.error(err);
+                    return res.json([]);
+                }
+                return res.json(result);
+            });
+    });
+    router.post("/", (req, res, next) => {
+        const { name, email } = req.body;
+        db.collection("users").insertOne({ name, email }, (err, resp) => {
+            if (err) {
+                console.error(err);
+                return res.status(505).send(`Failed to insert object: ${err}`);
+            }
+            return res.json(resp.ops[0]);
+        });
+    });
+    return router;
+}
+
+module.exports = users;

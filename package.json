@@ -6,11 +6,36 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "activedirectory": "^0.7.2",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.1.2",
+    "compression": "^1.7.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "express-session": "^1.15.6",
+    "flash": "^1.1.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
-    "morgan": "~1.9.0"
+    "mongodb": "^3.1.1",
+    "morgan": "~1.9.0",
+    "npm": "^6.2.0",
+    "passport": "^0.4.0",
+    "react-router": "^4.3.1",
+    "reactstrap": "^6.3.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "eslint": "^5.1.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-ava": "^5.0.0",
+    "eslint-plugin-css-modules": "^2.7.5",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-react": "^7.10.0",
+    "prettier": "^1.13.7"
   }
 }
