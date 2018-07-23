@@ -16,8 +16,8 @@ function users(db) {
             });
     });
     router.post("/", (req, res, next) => {
-        const { name, email } = req.body;
-        db.collection("users").insertOne({ name, email }, (err, resp) => {
+        const { name } = req.body;
+        db.collection("users").insertOne({ name }, (err, resp) => {
             if (err) {
                 console.error(err);
                 return res.status(505).send(`Failed to insert object: ${err}`);

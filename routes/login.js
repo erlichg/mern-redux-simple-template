@@ -10,6 +10,8 @@ router.get("/", (req, res) => {
 router.post(
     "/",
     (req, res) =>
+        // A dummy code to always login. You need to replace this with your own code to authenticate.
+        // A sample login using ldap is commented below
         req.logIn(req.body.username, err3 => {
             if (err3) {
                 const error = `ERROR: ${JSON.stringify(err3)}`;
@@ -22,7 +24,7 @@ router.post(
     // const c = {
     //     url: config.auth.ldapUrl,
     //     baseDN: config.auth.baseDN,
-    //     username: `CORP\\${req.body.username}`,
+    //     username: req.body.username,
     //     password: req.body.password
     // };
     // const ad = new ActiveDirectory(c);
