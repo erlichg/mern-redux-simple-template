@@ -1,61 +1,41 @@
-import React, { Component } from "react";
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink
-} from "reactstrap";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, {Component} from "react";
+import {Navbar, NavbarBrand, Nav, NavItem, NavLink} from "reactstrap";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import Home from "./components/home/Home-c";
 import Users from "./components/users/Users-c";
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {fab} from '@fortawesome/free-brands-svg-icons';
+import {faTrashAlt, faEdit} from '@fortawesome/free-solid-svg-icons';
+
+library.add(fab, faEdit, faTrashAlt)
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-
-        this.toggle = this.toggle.bind(this);
-        this.state = {
-            isOpen: false
-        };
-    }
-
-    toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
-
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
-                    <Navbar expand="md">
-                        <NavbarBrand href="/">
-                            <img src={logo} className="App-logo" alt="logo" />Welcome
-                            to React
-                        </NavbarBrand>
-                        <NavbarToggler onClick={this.toggle} />
-                        <Collapse isOpen={this.state.isOpen} navbar>
+            <Router>
+                <div className="App">
+                    <header className="App-header">
+                        <Navbar expand="md">
+                            <NavbarBrand href="/">
+                                <img src={logo} className="App-logo" alt="logo"/>React App
+                            </NavbarBrand>
                             <Nav navbar>
                                 <NavItem>
-                                    <NavLink href="/users">Users</NavLink>
+                                    <NavLink tag={Link} to="/users">Users</NavLink>
                                 </NavItem>
                             </Nav>
-                        </Collapse>
-                    </Navbar>
-                </header>
-                <Router>
-                    <div>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/users" component={Users} />
+                        </Navbar>
+                    </header>
+
+                    <div className="container-fluid">
+                        <Route exact path="/" component={Home}/>
+                        <Route exact path="/users" component={Users}/>
                     </div>
-                </Router>
-            </div>
+                </div>
+            </Router>
+
         );
     }
 }

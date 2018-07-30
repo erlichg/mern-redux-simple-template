@@ -9,12 +9,14 @@ export const reducer = handleActions(
         [decrement]: state => ({ ...state, counter: state.counter - 1 }),
         [getusers]: (state, payload) => ({
             ...state,
-            users: payload.payload || []
+            users: payload.success
+            ? payload.result
+            : []
         }),
         [adduser]: (state, payload) => ({
             ...state,
-            users: payload.payload._id
-                ? [...state.users, payload.payload]
+            users: payload.success
+                ? [...state.users, payload.result]
                 : state.users
         })
     },
@@ -28,17 +30,26 @@ export const asyncActionsMiddleware = store => next => action => {
     }
 
     const { url, data, method } = action.meta;
-    fetch(url, {
+    let options = {
         method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+    if (data) {
+        options.body = JSON.stringify(data);
+    }
+    fetch(url, options)
         .then(resultsObj => resultsObj.json())
         .then(json => {
-            next({ ...action, payload: json });
+            next({ ...action, result: json, success: true });
         })
         .catch(err => {
             console.error(err);
+            next({
+                ...action,
+                success: false
+            }); // Failure result. Comment to not call action in this case
         });
 
     return next(action);
